@@ -1,5 +1,5 @@
 from flask import Flask,Request
-from enroll.test import tests
+from .test import tests
 def create_app():
     app = Flask(__name__)
 

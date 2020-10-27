@@ -1,6 +1,6 @@
 import os
 
-from enroll import create_app
+from stuido import create_app
 
 app = create_app()
 
