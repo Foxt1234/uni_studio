@@ -44,7 +44,7 @@ def gen_file_name(filename):
     """
 
     i = 1
-    while os.path.exists(os.path.join(current_app.config['UPLOAD_FOLDER'], filename)):
+    while os.path.exists(os.path.join(current_app.config['FILESERVICE_UPLOAD_FOLDER'], filename)):
         name, extension = os.path.splitext(filename)
         filename = '%s_%s%s' % (name, str(i), extension)
         i += 1
@@ -55,7 +55,7 @@ def gen_file_name(filename):
 def create_thumbnail(image):
     try:
         base_width = 80
-        img = Image.open(os.path.join(current_app.config['UPLOAD_FOLDER'], image))
+        img = Image.open(os.path.join(current_app.config['FILESERVICE_UPLOAD_FOLDER'], image))
         w_percent = (base_width / float(img.size[0]))
         h_size = int((float(img.size[1]) * float(w_percent)))
         img = img.resize((base_width, h_size), PIL.Image.ANTIALIAS)
@@ -83,7 +83,7 @@ def upload():
 
             else:
                 # save file to disk
-                uploaded_file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+                uploaded_file_path = os.path.join(current_app.config['FILESERVICE_UPLOAD_FOLDER'], filename)
                 files.save(uploaded_file_path)
 
                 # create thumbnail after saving
@@ -100,12 +100,13 @@ def upload():
 
     if request.method == 'GET':
         # get all file in ./data directory
-        files = [f for f in os.listdir(current_app.config['UPLOAD_FOLDER']) if os.path.isfile(os.path.join(current_app.config['UPLOAD_FOLDER'],f)) and f not in IGNORED_FILES ]
+        files = [f for f in os.listdir(current_app.config['FILESERVICE_UPLOAD_FOLDER'])\
+                 if os.path.isfile(os.path.join(current_app.config['FILESERVICE_UPLOAD_FOLDER'],f)) and f not in IGNORED_FILES ]
         
         file_display = []
 
         for f in files:
-            size = os.path.getsize(os.path.join(current_app.config['UPLOAD_FOLDER'], f))
+            size = os.path.getsize(os.path.join(current_app.config['FILESERVICE_UPLOAD_FOLDER'], f))
             file_saved = uploadfile(name=f, size=size)
             file_display.append(file_saved.get_file())
 
@@ -116,7 +117,7 @@ def upload():
 
 @app.route("/delete/<string:filename>", methods=['DELETE'])
 def delete(filename):
-    file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+    file_path = os.path.join(current_app.config['FILESERVICE_UPLOAD_FOLDER'], filename)
     file_thumb_path = os.path.join(current_app.config['THUMBNAIL_FOLDER'], filename)
 
     if os.path.exists(file_path):
@@ -139,7 +140,7 @@ def get_thumbnail(filename):
 
 @app.route("/data/<string:filename>", methods=['GET'])
 def get_file(filename):
-    return send_from_directory(os.path.join(current_app.config['UPLOAD_FOLDER']), filename=filename)
+    return send_from_directory(os.path.join(current_app.config['FILESERVICE_UPLOAD_FOLDER']), filename=filename)
 
 
 @app.route('/', methods=['GET', 'POST'])

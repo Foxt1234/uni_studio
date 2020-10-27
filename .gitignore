@@ -123,3 +123,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+# jetbrains
+.idea/
+.idea*
+.idea/$CACHE_FILE$
+.idea/encodings.xml

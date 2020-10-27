@@ -11,7 +11,7 @@ def create_app():
     app.register_blueprint(tests)
     app.register_blueprint(fileserviceapp)
     app.config['SECRET_KEY'] = 'hard to guess string'
-    app.config['UPLOAD_FOLDER'] = join_upload_dir('data/')
+    app.config['FILESERVICE_UPLOAD_FOLDER'] = join_upload_dir('data/')
     app.config['THUMBNAIL_FOLDER'] = join_upload_dir('data/thumbnail/')
     app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
     return app
