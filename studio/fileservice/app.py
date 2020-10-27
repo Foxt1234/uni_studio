@@ -15,7 +15,7 @@ from flask import Flask, Blueprint,request, current_app, render_template, redire
 from flask_bootstrap import Bootstrap
 from werkzeug import secure_filename
 
-from .lib.upload_file import uploadfile
+from .libs.upload_file import uploadfile
 
 
 #app = Flask(__name__)
@@ -59,7 +59,7 @@ def create_thumbnail(image):
         w_percent = (base_width / float(img.size[0]))
         h_size = int((float(img.size[1]) * float(w_percent)))
         img = img.resize((base_width, h_size), PIL.Image.ANTIALIAS)
-        img.save(os.path.join(current_app.config['THUMBNAIL_FOLDER'], image))
+        img.save(os.path.join(current_app.config['FILESERVICE_THUMBNAIL_FOLDER'], image))
 
         return True
 
@@ -118,7 +118,7 @@ def upload():
 @app.route("/delete/<string:filename>", methods=['DELETE'])
 def delete(filename):
     file_path = os.path.join(current_app.config['FILESERVICE_UPLOAD_FOLDER'], filename)
-    file_thumb_path = os.path.join(current_app.config['THUMBNAIL_FOLDER'], filename)
+    file_thumb_path = os.path.join(current_app.config['FILESERVICE_THUMBNAIL_FOLDER'], filename)
 
     if os.path.exists(file_path):
         try:
@@ -135,7 +135,7 @@ def delete(filename):
 # serve static files
 @app.route("/thumbnail/<string:filename>", methods=['GET'])
 def get_thumbnail(filename):
-    return send_from_directory(current_app.config['THUMBNAIL_FOLDER'], filename=filename)
+    return send_from_directory(current_app.config['FILESERVICE_THUMBNAIL_FOLDER'], filename=filename)
 
 
 @app.route("/data/<string:filename>", methods=['GET'])
