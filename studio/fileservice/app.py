@@ -13,7 +13,7 @@ import traceback
 
 from flask import Flask, Blueprint,request, current_app, render_template, redirect, url_for, send_from_directory
 from flask_bootstrap import Bootstrap
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
 
 from .libs.upload_file import uploadfile
 
@@ -34,6 +34,7 @@ IGNORED_FILES = set(['.gitignore'])
 
 
 def allowed_file(filename):
+    return True
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
