@@ -1,8 +1,8 @@
 from sqlalchemy.event import listens_for
 
-from .base import db, Column
+from .base import db
 
 class TimestampMixin(object):
-    updated_at = Column(db.DateTime(True), default=db.func.now(), nullable=False)
-    created_at = Column(db.DateTime(True), default=db.func.now(), nullable=False)
+    updated_at = db.Column(db.DateTime(True), default=db.func.now(), nullable=False)
+    created_at = db.Column(db.DateTime(True), default=db.func.now(), nullable=False)
 

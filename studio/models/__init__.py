@@ -6,9 +6,6 @@ from sqlalchemy.orm import column_property, validates
 
 from .mixins import TimestampMixin
 from .base import db
-
+from .vote import VoteInfo,VoteVotes,VoteCandidates
 logger = logging.getLogger(__name__)
 
-
-class Alert(TimestampMixin,  db.Model):
-    pass
