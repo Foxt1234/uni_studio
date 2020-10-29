@@ -16,3 +16,6 @@ A web based set of tools for operations of studios in universities.
 
 - Album  
     A photo-sharing platform providing support for propaganda work of the CCYL.
+
+- Vote  
+    Customizable voting.
