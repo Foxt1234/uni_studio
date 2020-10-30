@@ -15,31 +15,37 @@ def root():
 @vote.route('/<int:vote_id>',methods=["GET"])
 def vote_page(vote_id):
     candidate_all = VoteCandidates.query.filter(VoteCandidates.vote_id==vote_id).all()
-    vote_info = VoteInfo.query.filter(VoteInfo.id==vote_id).first()
+    vote_info = VoteInfo.query.filter(VoteInfo.id==vote_id).first_or_404()
     return render_template(
         'vote_vote_page.html',
         candidate_all=candidate_all,
-        vote_info=vote_info
+        vote_info=vote_info,
+        admin=False
     )
 
 @vote.route('/<int:vote_id>',methods=["POST"])
 def vote_handler(vote_id):
-    voted = VoteVotes.query.filter(VoteVotes.ip==request.remote_addr).filter(VoteVotes.vote_id==vote_id).first()
+    voted = VoteVotes.query.filter(VoteVotes.ip==request.remote_addr).filter(VoteVotes.vote_id==vote_id).first_or_404()
     if voted:
+        print('voted!!')
         pass
         #return "volted!"
     vote_list = request.get_json()
+    print(request.form.getlist('candidates'))
+    vote_list = request.form.getlist('candidates')
+
+    #return '1'
     #votes_list = json.loads(votes)
-    print(vote_list)
+    #print(vote_list)
     vs=[]
     id_list = []
     for v in vote_list:
-        if v.get('candidate') == None:
-            continue
-        print(v)
+        #if v.get('candidate') == None:
+        #    continue
+        #print(v)
         _v = VoteVotes(
             ip = request.remote_addr,
-            candidate = int(v['candidate']),
+            candidate = int(v),#['candidate']),
             vote_id = vote_id
         )
         vs.append(_v)

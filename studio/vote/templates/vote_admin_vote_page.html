@@ -19,7 +19,7 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <a href="{{url_for('vote.root')}}">back</a>
+        <a href="{{url_for('vote.admin_votes_show')}}">back</a>
         <div id="header">
             {% if vote_info.image %}
             <img src="{{vote_info.image}}"/>
@@ -36,6 +36,7 @@
             <p>{{v.description}}</p>
             <p>{{v.votes}}</p>
             <p>{{v.action_at}}</p>
+            <a href="{{url_for('vote.candidate_del',vote_id=vote_info.id,candidate_id=v.id)}}">del</a>
             <input type="checkbox" name="candidates" value="{{v.id}}"/>
             {% endfor %}
             <br>
