@@ -7,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>vote page</title>
+        <title>admin votes</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
@@ -16,12 +16,12 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        {% for v in candidate_all %}
-        <h3>{{v.title}}</h3>
-        <h4>{{v.subtitle}}</h4>
-        <p>{{v.description}}</p>
-        <p>{{v.votes}}</p>
-        <p>{{v.action_at}}</p>
+        {% for v in votes_all %}
+        <span>created_at: {{v.created_at}}</span>
+        <span>ip: {{v.ip}}</span>
+        <span>candidate:{{v.candidate}}</span>
+        <span>vote_id:{{v.vote_id}}</span>
+        <hr>
         {% endfor %}
         <script src="" async defer></script>
     </body>

@@ -16,8 +16,12 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+        <a href="/vote/populate">populate</a>
+
         {% for v in info_list %}
+        <hr>
         <h3><a href="/vote/{{v.id}}">{{v.title}}</a></h3>
+        <a href="/vote/populate/{{v.id}}">populate {{v.id}}</a>
         <h4>{{v.subtitle}}</h4>
         <p>{{v.description}}</p>
         <p>{{v.disabled}}</p>
