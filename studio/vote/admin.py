@@ -34,7 +34,7 @@ def admin_votes_add():
     except Exception as e:
         db.session.rollback()
         print(e)
-    return redirect(url_for('vote.root'))
+    return redirect(url_for('vote.admin_votes_show'))
 
 @vote.route('/admin/votes/<int:vote_id>',methods=["GET"])
 def admin_vote_page(vote_id):
