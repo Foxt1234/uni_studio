@@ -15,9 +15,11 @@ def root():
 @vote.route('/<int:vote_id>',methods=["GET"])
 def vote_page(vote_id):
     candidate_all = VoteCandidates.query.filter(VoteCandidates.vote_id==vote_id).all()
+    vote_info = VoteInfo.query.filter(VoteInfo.id==vote_id).first()
     return render_template(
         'vote_vote_page.html',
-        candidate_all = candidate_all
+        candidate_all=candidate_all,
+        vote_info=vote_info
     )
 
 @vote.route('/<int:vote_id>',methods=["POST"])
