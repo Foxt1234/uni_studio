@@ -25,7 +25,7 @@ def vote_page(vote_id):
 
 @vote.route('/<int:vote_id>',methods=["POST"])
 def vote_handler(vote_id):
-    voted = VoteVotes.query.filter(VoteVotes.ip==request.remote_addr).filter(VoteVotes.vote_id==vote_id).first_or_404()
+    voted = VoteVotes.query.filter(VoteVotes.ip==request.remote_addr).filter(VoteVotes.vote_id==vote_id).first()
     if voted:
         print('voted!!')
         pass

@@ -30,12 +30,5 @@
         <p>{{v.end_at}}</p>
         {% endfor %}
         <hr>
-        <form action="{{url_for('vote.votes_add')}}" method="POST">
-            <input type="text" name="title" placeholder="title">
-            <input type="text" name="subtitle" placeholder="subtitle">
-            <input type="text" name="description" placeholder="description">
-            <input type="text" name="description" placeholder="image url"> 
-            <input type="submit">submit</input>       
-        </form>
     </body>
 </html>

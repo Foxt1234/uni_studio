@@ -36,7 +36,7 @@
             <p>{{v.description}}</p>
             <p>{{v.votes}}</p>
             <p>{{v.action_at}}</p>
-            <input type="checkbox" name="candidates" value="{{v.id}}"/>
+            <input type="checkbox" name="candidates" value="{{v.id}}" required/>
             {% endfor %}
             <br>
             <input type="submit">
